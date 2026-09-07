@@ -115,3 +115,16 @@ flowchart TB
 - PDF browser dependencies are documented but not yet installed in Docker (add when PDF stack is chosen).
 - Worker health endpoint is internal (`WORKER_HEALTH_PORT`); public worker health requires Railway networking configuration.
 - The marketing site can deploy to Railway as the web service today; full portal features require additional application development.
+
+## Pre-PR Railway failure (2026-09-07 ~20:53 UTC)
+
+If Railway was connected to `master` **before PR #2**, the deploy likely failed for one of these reasons:
+
+| Symptom | Cause | Fix in PR #2 |
+|---------|-------|--------------|
+| Log stops at `unpacking archive` then fails | Service builder set to **Dockerfile** but no `Dockerfile` existed on `master` | Adds `Dockerfile` + switches default builder to **Nixpacks** |
+| Build succeeds, deploy marked unhealthy | No `/api/health` route on `master` | Adds `/api/health` |
+| Health check fails after attaching Postgres/Redis | Health endpoint returned HTTP 503 when dependencies were not ready | Health now returns HTTP 200 with `status: "degraded"` in JSON |
+| App unreachable after start | `next start` not bound to Railway `PORT` / `0.0.0.0` | `npm start` now uses `-H 0.0.0.0 -p ${PORT:-3000}` |
+
+The line `unpacking archive` is an **info** log (Railway extracting your repo), not the error itself. Scroll further in the deployment logs for the first `[err]` line after it.

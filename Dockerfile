@@ -1,4 +1,6 @@
 # syntax=docker/dockerfile:1
+# Optional Docker-based deploy. Railway defaults to Nixpacks via railway.toml.
+# Use this file when a service is explicitly configured with builder = "DOCKERFILE".
 
 FROM node:20-bookworm-slim AS base
 WORKDIR /app
@@ -15,6 +17,8 @@ RUN npm ci
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+ENV DATABASE_URL="postgresql://build:build@localhost:5432/build"
+ENV DIRECT_URL="postgresql://build:build@localhost:5432/build"
 RUN npm run build
 
 FROM base AS runner
@@ -38,4 +42,6 @@ COPY --from=builder /app/node_modules/ioredis ./node_modules/ioredis
 COPY --from=builder /app/node_modules/tsx ./node_modules/tsx
 USER nextjs
 EXPOSE 3000
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 CMD ["node", "server.js"]

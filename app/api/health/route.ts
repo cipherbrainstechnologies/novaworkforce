@@ -30,6 +30,8 @@ export async function GET() {
   const healthy = blockingIssues.length === 0
   const status = healthy ? 'ok' : 'degraded'
 
+  // Railway health checks require HTTP 200 once the app process is running.
+  // Dependency readiness is reported in the JSON body, not via a failing status code.
   return NextResponse.json(
     {
       status,
@@ -48,6 +50,6 @@ export async function GET() {
       issues: blockingIssues,
       responseTimeMs: Date.now() - startedAt,
     },
-    { status: healthy ? 200 : 503 }
+    { status: 200 }
   )
 }

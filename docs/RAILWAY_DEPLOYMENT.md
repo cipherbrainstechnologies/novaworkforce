@@ -153,6 +153,7 @@ Production prompts require explicit confirmation in migrate/deploy scripts.
 
 | Symptom | Likely cause | Fix |
 |---------|--------------|-----|
+| Log shows `unpacking archive` then failure | Builder mismatch (Dockerfile selected but missing), or truncated logs | Ensure PR #2 is merged; default builder is Nixpacks. Check logs after that line for `[err]` |
 | Database connection errors | Missing/incorrect `DATABASE_URL` reference | Attach Postgres plugin; set `${{Postgres.DATABASE_URL}}` on web + worker |
 | Prisma migration failure | Drift or missing migration history | Inspect migration logs; deploy fix forward; avoid reset in prod |
 | Redis connection failure | Missing `REDIS_URL` or TLS mismatch | Set `${{Redis.REDIS_URL}}`; verify `rediss://` TLS options |
