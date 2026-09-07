@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+.git
+.github
+.idea
+coverage
+*.md
+!README.md
+.env
+.env*.local
+.railway
+npm-debug.log*
+Dockerfile*
+docker-compose*
