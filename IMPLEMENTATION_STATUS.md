@@ -66,13 +66,13 @@ Railway deployment was **not executed** in this environment because Railway cred
 
 ## Test/build results
 
-Run locally after `npm ci`:
+Validated on branch `cursor/railway-deployment-5b0a`:
 
-```bash
-npm run lint
-npm run typecheck
-npm test
-npm run build
+```text
+npm run lint      ✔ No ESLint warnings or errors
+npm run typecheck ✔ Passed
+npm test          ✔ 3 tests passed
+npm run build     ✔ Production build succeeded
 ```
 
-Results are recorded in the commit/PR validation step for this branch.
+Shellcheck was not available in the Cloud Agent environment.
