@@ -17,7 +17,7 @@ export default function AboutPage() {
             Built from operations, not just software.
           </h1>
           <p className="text-muted text-center max-w-2xl mx-auto text-lg">
-            Nova Workforce was built by people who have run India operations for global startups. We know the pain points because we've lived them.
+            Nova Workforce was built by people who have run India operations for global startups. We know the pain points because we&apos;ve lived them.
           </p>
         </Container>
       </Section>

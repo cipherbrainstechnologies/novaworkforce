@@ -38,7 +38,7 @@ export default function ContactPage() {
             Get in touch
           </h1>
           <p className="text-muted text-center max-w-2xl mx-auto">
-            Ready to hire in India? We'd love to hear from you.
+            Ready to hire in India? We&apos;d love to hear from you.
           </p>
         </Container>
       </Section>
@@ -102,7 +102,7 @@ export default function ContactPage() {
 
             {status === 'success' && (
               <div className="p-4 rounded-lg bg-success/20 text-success text-sm">
-                Thanks! We'll be in touch soon.
+                Thanks! We&apos;ll be in touch soon.
               </div>
             )}
             {status === 'error' && (
